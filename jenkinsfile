@@ -1,0 +1,10 @@
+pipeline {
+    agent any
+    stages {
+        stage ("jenkinsfile creation demo") {
+            steps{
+                echo "creating jenkinsfile and adding to git repository demo"
+            }
+        }
+    }
+}
