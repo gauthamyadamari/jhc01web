@@ -1,9 +1,38 @@
-pipeline {
+pipeline{
     agent any
-    stages {
-        stage ("jenkinsfile creation demo") {
+    stages{
+        stage("maven build") {
             steps{
-                echo "creating jenkinsfile and adding to git repository demo"
+                sh "mvn clean package"
+            }
+        }
+        stage("Deploy to DEV") {
+            when {
+                branch "develop"
+            }
+            steps{
+                echo "deploy to development server"
+            }
+             stage("Deploy to Test") {
+            when {
+                branch "QA"
+            }
+            steps{
+                echo "deploy to QA server"
+            }
+             stage("Deploy to stage") {
+            when {
+                branch "staging"
+            }
+            steps{
+                echo "deploy to staging server"
+            }
+             stage("Deploy to prod") {
+            when {
+                branch "main"
+            }
+            steps{
+                echo "deploy to prod server"
             }
         }
     }
